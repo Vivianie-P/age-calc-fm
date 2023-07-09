@@ -2,7 +2,7 @@ import Input from "./Input";
 import AgeCalc from "./AgeCalc";
 import Arrow from "../assets/icon-arrow.svg";
 import { useEffect, useState } from "react";
-import { FormInputInterface } from "./Input";
+import { FormInputInterface } from "../utilities.tsx/Interfaces";
 import { validateForm } from "../utilities.tsx/validateForm";
 
 const defaultFormState: FormInputInterface = {

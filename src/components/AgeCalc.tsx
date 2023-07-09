@@ -1,8 +1,4 @@
-interface AgeCalcProps {
-	years: string;
-	months: string;
-	days: string;
-}
+import { AgeCalcProps } from "../utilities.tsx/Interfaces";
 
 const AgeCalc = (props: AgeCalcProps) => {
 	return (

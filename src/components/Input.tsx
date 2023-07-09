@@ -1,18 +1,6 @@
 import { FormEvent } from "react";
-
-export interface FormInputInterface {
-	[key: string]: { value: string; hasError: boolean; errorType: string };
-	year: { value: string; hasError: boolean; errorType: string };
-	month: { value: string; hasError: boolean; errorType: string };
-	day: { value: string; hasError: boolean; errorType: string };
-}
-
-interface TextInputProps {
-	label: string;
-	placeholder: string;
-	inputState: FormInputInterface;
-	stateSetter: (value: FormInputInterface) => void;
-}
+import { FormInputInterface } from "../utilities.tsx/Interfaces";
+import { TextInputProps } from "../utilities.tsx/Interfaces";
 
 const Input = (props: TextInputProps) => {
 	const currentInput = props.label.toLowerCase();
@@ -44,7 +32,7 @@ const Input = (props: TextInputProps) => {
 				id="birthday"
 				className={`${
 					hasError ? "border-light-red" : "border-light-grey"
-				}  "h-24 hover:border-purple" : cursor-pointer  rounded-xl border p-4 text-3xl text-off-black placeholder:text-smokey-grey`}
+				}  ${`md:h-30 h-24 cursor-pointer rounded-xl border p-4 text-3xl text-off-black placeholder:text-smokey-grey hover:border-purple`}`}
 				type="number"
 				onChange={handleChange}
 			/>

@@ -1,8 +1,5 @@
-import { FormInputInterface } from "../components/Input";
-interface ErrorInfoInterface {
-	hasError: boolean;
-	errorType: string;
-}
+import { FormInputInterface } from "../utilities.tsx/Interfaces";
+import { ErrorInfoInterface } from "../utilities.tsx/Interfaces";
 
 export const validateForm = (
 	stateSetter: (value: FormInputInterface) => void,
