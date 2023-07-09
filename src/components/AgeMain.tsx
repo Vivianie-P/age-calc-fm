@@ -3,41 +3,32 @@ import AgeCalc from "./AgeCalc";
 import Arrow from "../assets/icon-arrow.svg";
 import { useEffect, useState } from "react";
 import { FormInputInterface } from "./Input";
+import { validateForm } from "../utilities.tsx/validateForm";
 
-const defaultFormState = {
-	year: "",
-	month: "",
-	day: "",
+const defaultFormState: FormInputInterface = {
+	year: { value: "", hasError: false, errorType: "" },
+	month: { value: "", hasError: false, errorType: "" },
+	day: { value: "", hasError: false, errorType: "" },
 };
 
 const AgeMain = () => {
 	const [inputState, setInputState] =
 		useState<FormInputInterface>(defaultFormState);
 
+	const handleSubmit = () => {
+		// if the validateForm function returns true then call
+		// the ageCalcConverter function that will convert the date
+		// from the input to the age in years months and days
+		validateForm(setInputState, inputState);
+	};
+
 	useEffect(() => {
-		if (inputState.year === "") {
-			setInputState({
-				...inputState,
-				year: "--",
-			});
-		}
-		if (inputState.month === "") {
-			setInputState({
-				...inputState,
-				month: "--",
-			});
-		}
-		if (inputState.day === "") {
-			setInputState({
-				...inputState,
-				day: "--",
-			});
-		}
-	}, [inputState.year, inputState.month, inputState.day]);
+		console.log("inputState: ", inputState);
+	}, [inputState]);
 
 	return (
 		<div className="flex h-fit w-full max-w-5xl flex-col justify-center rounded-t-3xl rounded-bl-3xl rounded-br-9xl bg-white px-10 py-20">
-			<div className="flex w-full max-w-3xl gap-7 overflow-x-hidden">
+			<form className="flex w-full max-w-3xl gap-7 overflow-x-hidden" action="">
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
@@ -56,9 +47,10 @@ const AgeMain = () => {
 					label="YEAR"
 					placeholder="YYYY"
 				/>
-			</div>
-			<div className="relative mb-12 mt-12 flex flex-col items-center justify-center ">
-				<button>
+			</form>
+
+			<div className="relative mb-12 mt-12 flex flex-col items-center justify-center md:items-end">
+				<button className="flex justify-center" onClick={handleSubmit}>
 					<img
 						className="mt relative z-10 h-28 w-28 cursor-pointer rounded-full bg-purple p-8 hover:bg-off-black"
 						src={Arrow}
@@ -71,9 +63,9 @@ const AgeMain = () => {
 				<AgeCalc
 					// change below state values to be the values that are calculated from
 					// the user's birthday
-					years={inputState.year}
-					months={inputState.month}
-					days={inputState.day}
+					years={inputState.year.value}
+					months={inputState.month.value}
+					days={inputState.day.value}
 				/>
 			</div>
 		</div>
