@@ -1,37 +1,40 @@
-import { FormInputInterface } from "../utilities.tsx/Interfaces";
-import { ErrorInfoInterface } from "../utilities.tsx/Interfaces";
+import {
+	FormInputInterface,
+	ErrorInfoInterface,
+	AgeCalcProps,
+} from "../utilities.tsx/Interfaces";
+import moment from "moment";
 
 export const validateForm = (
 	stateSetter: (value: FormInputInterface) => void,
-	inputState: FormInputInterface
+	inputState: FormInputInterface,
+	ageStateSetter: (param: AgeCalcProps) => void
 ) => {
-	const isValidDay: ErrorInfoInterface = validateDay(inputState);
-	const isValidMonth: ErrorInfoInterface = validateMonth(inputState);
-	const isValidYear: ErrorInfoInterface = validateYear(inputState);
+	const dayInfo: ErrorInfoInterface = validateDay(inputState);
+	const monthInfo: ErrorInfoInterface = validateMonth(inputState);
+	const yearInfo: ErrorInfoInterface = validateYear(inputState);
 
-	// if (isValidDay && isValidMonth && isValidYear) {
-	// 	ageCalcConverter(isValidDay, isValidMonth, isValidYear);
-	// }
 	stateSetter({
 		day: {
 			...inputState["day"],
-			hasError: isValidDay.hasError,
-			errorType: isValidDay.errorType,
+			hasError: dayInfo.hasError,
+			errorType: dayInfo.errorType,
 		},
 		month: {
 			...inputState["month"],
-			hasError: isValidMonth.hasError,
-			errorType: isValidMonth.errorType,
+			hasError: monthInfo.hasError,
+			errorType: monthInfo.errorType,
 		},
 		year: {
 			...inputState["year"],
-			hasError: isValidYear.hasError,
-			errorType: isValidYear.errorType,
+			hasError: yearInfo.hasError,
+			errorType: yearInfo.errorType,
 		},
 	});
-	// console.log(isValidDay);
-	// console.log(isValidMonth);
-	// console.log(isValidYear);
+
+	if (!dayInfo.hasError && !monthInfo.hasError && !yearInfo.hasError) {
+		ageCalcConverter(inputState, ageStateSetter);
+	}
 };
 
 const validateDay = (inputState: FormInputInterface) => {
@@ -110,4 +113,36 @@ const validateYear = (inputState: FormInputInterface) => {
 	}
 };
 
-// export const ageCalcConverter = (isValidDay, isValidMonth, isValidYear) => {};
+export const ageCalcConverter = (
+	inputState: FormInputInterface,
+	ageStateSetter: (param: AgeCalcProps) => void
+) => {
+	let dayInputValue = parseInt(inputState.day.value);
+	let monthInputValue = parseInt(inputState.month.value) - 1;
+	let yearInputValue = parseInt(inputState.year.value);
+
+	const birthDate = new Date(
+		yearInputValue,
+		monthInputValue,
+		dayInputValue
+	).getTime();
+
+	const currentDate = new Date().getTime();
+	const diff = currentDate - birthDate;
+	const duration = moment.duration(diff);
+
+	const timePassedInYears = duration.years();
+	const timePassedInDays = duration.days();
+	const timePassedInMonths = duration.months();
+	const totalDuration = {
+		day: timePassedInDays,
+		month: timePassedInMonths,
+		year: timePassedInYears,
+	};
+
+	ageStateSetter({
+		days: String(totalDuration.day),
+		months: String(totalDuration.month),
+		years: String(totalDuration.year),
+	});
+};

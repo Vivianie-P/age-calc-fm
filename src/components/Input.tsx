@@ -1,6 +1,8 @@
 import { FormEvent } from "react";
-import { FormInputInterface } from "../utilities.tsx/Interfaces";
-import { TextInputProps } from "../utilities.tsx/Interfaces";
+import {
+	FormInputInterface,
+	TextInputProps,
+} from "../utilities.tsx/Interfaces";
 
 const Input = (props: TextInputProps) => {
 	const currentInput = props.label.toLowerCase();

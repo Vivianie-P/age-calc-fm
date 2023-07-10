@@ -2,7 +2,7 @@ import Input from "./Input";
 import AgeCalc from "./AgeCalc";
 import Arrow from "../assets/icon-arrow.svg";
 import { useEffect, useState } from "react";
-import { FormInputInterface } from "../utilities.tsx/Interfaces";
+import { FormInputInterface, AgeCalcProps } from "../utilities.tsx/Interfaces";
 import { validateForm } from "../utilities.tsx/validateForm";
 
 const defaultFormState: FormInputInterface = {
@@ -11,15 +11,23 @@ const defaultFormState: FormInputInterface = {
 	day: { value: "", hasError: false, errorType: "" },
 };
 
+const defaultAgeState: AgeCalcProps = {
+	years: "",
+	months: "",
+	days: "",
+};
+
 const AgeMain = () => {
 	const [inputState, setInputState] =
 		useState<FormInputInterface>(defaultFormState);
+
+	const [age, setAge] = useState<AgeCalcProps>(defaultAgeState);
 
 	const handleSubmit = () => {
 		// if the validateForm function returns true then call
 		// the ageCalcConverter function that will convert the date
 		// from the input to the age in years months and days
-		validateForm(setInputState, inputState);
+		validateForm(setInputState, inputState, setAge);
 	};
 
 	useEffect(() => {
@@ -61,11 +69,10 @@ const AgeMain = () => {
 			</div>
 			<div className="flex w-full">
 				<AgeCalc
-					// change below state values to be the values that are calculated from
-					// the user's birthday
-					years={inputState.year.value}
-					months={inputState.month.value}
-					days={inputState.day.value}
+					stateSetter={setInputState}
+					years={age.years}
+					months={age.months}
+					days={age.days}
 				/>
 			</div>
 		</div>

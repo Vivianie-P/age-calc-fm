@@ -2,7 +2,9 @@ export interface AgeCalcProps {
 	years: string;
 	months: string;
 	days: string;
+	stateSetter?: any;
 }
+
 export interface FormInputInterface {
 	[key: string]: { value: string; hasError: boolean; errorType: string };
 	year: { value: string; hasError: boolean; errorType: string };
