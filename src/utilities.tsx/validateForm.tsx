@@ -34,6 +34,12 @@ export const validateForm = (
 
 	if (!dayInfo.hasError && !monthInfo.hasError && !yearInfo.hasError) {
 		ageCalcConverter(inputState, ageStateSetter);
+	} else {
+		ageStateSetter({
+			days: "",
+			months: "",
+			years: "",
+		});
 	}
 };
 

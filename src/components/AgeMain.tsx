@@ -40,19 +40,19 @@ const AgeMain = () => {
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="DAY"
+					label="Day"
 					placeholder="DD"
 				/>
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="MONTH"
+					label="Month"
 					placeholder="MM"
 				/>
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="YEAR"
+					label="Year"
 					placeholder="YYYY"
 				/>
 			</form>
@@ -69,7 +69,7 @@ const AgeMain = () => {
 			</div>
 			<div className="flex w-full">
 				<AgeCalc
-					stateSetter={setInputState}
+					inputState={inputState}
 					years={age.years}
 					months={age.months}
 					days={age.days}

@@ -17,6 +17,7 @@ export default {
 		extend: {
 			letterSpacing: {
 				"widest-2": "0.2em",
+				"widest-3": "0.3em",
 			},
 			spacing: {
 				20: "4.8rem",

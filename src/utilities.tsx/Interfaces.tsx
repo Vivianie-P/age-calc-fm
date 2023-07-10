@@ -2,7 +2,7 @@ export interface AgeCalcProps {
 	years: string;
 	months: string;
 	days: string;
-	stateSetter?: any;
+	inputState?: any;
 }
 
 export interface FormInputInterface {

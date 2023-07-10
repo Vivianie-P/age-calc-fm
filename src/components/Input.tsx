@@ -24,7 +24,7 @@ const Input = (props: TextInputProps) => {
 			<label
 				className={`${
 					hasError ? "text-light-red" : "text-smokey-grey"
-				} "font-poppins tracking-widest-2" text-xl md:text-2xl`}
+				} font-poppins text-xl tracking-widest-2 md:text-2xl`}
 				htmlFor="birthday"
 			>
 				{props.label}
@@ -33,27 +33,28 @@ const Input = (props: TextInputProps) => {
 				placeholder={props.placeholder}
 				id="birthday"
 				className={`${
-					hasError ? "border-light-red" : "border-light-grey"
-				}  ${`md:h-30 h-24 cursor-pointer rounded-xl border p-4 text-3xl text-off-black placeholder:text-smokey-grey hover:border-purple`}`}
+					hasError ? "border-light-red hover:border-light-red" : "border-light-grey"
+				}  ${`md:h-30 h-24 cursor-pointer rounded-xl border p-4 text-3xl text-off-black placeholder:text-smokey-grey hover:border-purple focus:outline-none`}`}
 				type="number"
 				onChange={handleChange}
 			/>
 			{errorType === "empty" ? (
-				<span className="m-2 w-full italic text-light-red">EMPTY ERROR</span>
-			) : (
-				""
-			)}
-
-			{errorType === "invalid" ? (
-				<span className="m-2 w-full italic text-light-red">
-					Must be a valid date
+				<span className="m-2 w-full border-light-red text-lg italic text-light-red">
+					This field is required
 				</span>
 			) : (
 				""
 			)}
 
-			{/* {props.inputState[currentInput as keyof FormInputInterface].errorType ===
-			"invalid" ? (
+			{errorType === "invalid" ? (
+				<span className="m-2 w-full border-light-red text-lg italic text-light-red">
+					{`Must be a valid ${props.label}`}
+				</span>
+			) : (
+				""
+			)}
+
+			{/* {hasError ? (
 				<span className="text-light-red">INVALID YEAR ERROR</span>
 			) : (
 				""
