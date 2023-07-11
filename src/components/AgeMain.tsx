@@ -40,19 +40,19 @@ const AgeMain = () => {
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="Day"
+					label="DAY"
 					placeholder="DD"
 				/>
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="Month"
+					label="MONTH"
 					placeholder="MM"
 				/>
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
-					label="Year"
+					label="YEAR"
 					placeholder="YYYY"
 				/>
 			</form>

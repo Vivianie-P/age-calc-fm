@@ -14,6 +14,17 @@ export const validateForm = (
 	const monthInfo: ErrorInfoInterface = validateMonth(inputState);
 	const yearInfo: ErrorInfoInterface = validateYear(inputState);
 
+	let dayInputValue = parseInt(inputState.day.value);
+	let monthInputValue = parseInt(inputState.month.value) - 1;
+	let yearInputValue = parseInt(inputState.year.value);
+
+	const birthDate = new Date(yearInputValue, monthInputValue, dayInputValue);
+
+	let date = new Date(birthDate);
+	let day = date.getDate();
+	let badDate = false;
+	// console.log(day);
+
 	stateSetter({
 		day: {
 			...inputState["day"],
@@ -32,7 +43,24 @@ export const validateForm = (
 		},
 	});
 
-	if (!dayInfo.hasError && !monthInfo.hasError && !yearInfo.hasError) {
+	if (dayInfo.hasError === false && day != dayInputValue) {
+		stateSetter({
+			...inputState,
+			day: {
+				...inputState["day"],
+				hasError: true,
+				errorType: "badDate",
+			},
+		});
+		badDate = true;
+	}
+
+	if (
+		dayInfo.hasError === false &&
+		monthInfo.hasError === false &&
+		yearInfo.hasError === false &&
+		badDate === false
+	) {
 		ageCalcConverter(inputState, ageStateSetter);
 	} else {
 		ageStateSetter({
@@ -106,7 +134,7 @@ const validateYear = (inputState: FormInputInterface) => {
 	yearValue = Number(inputState.year.value);
 	const currentYear = new Date().getFullYear();
 
-	if (yearValue > currentYear || yearValue < 1) {
+	if (yearValue > currentYear || yearValue < 0) {
 		return {
 			hasError: true,
 			errorType: "invalid",
@@ -127,14 +155,12 @@ export const ageCalcConverter = (
 	let monthInputValue = parseInt(inputState.month.value) - 1;
 	let yearInputValue = parseInt(inputState.year.value);
 
-	const birthDate = new Date(
-		yearInputValue,
-		monthInputValue,
-		dayInputValue
-	).getTime();
+	const birthDate = new Date(yearInputValue, monthInputValue, dayInputValue);
+
+	birthDate.setUTCFullYear(yearInputValue);
 
 	const currentDate = new Date().getTime();
-	const diff = currentDate - birthDate;
+	const diff = currentDate - birthDate.getTime();
 	const duration = moment.duration(diff);
 
 	const timePassedInYears = duration.years();
