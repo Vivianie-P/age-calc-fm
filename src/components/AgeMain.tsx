@@ -24,9 +24,6 @@ const AgeMain = () => {
 	const [age, setAge] = useState<AgeCalcProps>(defaultAgeState);
 
 	const handleSubmit = () => {
-		// if the validateForm function returns true then call
-		// the ageCalcConverter function that will convert the date
-		// from the input to the age in years months and days
 		validateForm(setInputState, inputState, setAge);
 	};
 
@@ -35,8 +32,11 @@ const AgeMain = () => {
 	}, [inputState]);
 
 	return (
-		<div className="flex h-fit w-full max-w-5xl flex-col justify-center rounded-t-3xl rounded-bl-3xl rounded-br-9xl bg-white px-10 py-20">
-			<form className="flex w-full max-w-3xl gap-7 overflow-x-hidden" action="">
+		<div className="flex h-fit w-full flex-col justify-center rounded-t-3xl rounded-bl-3xl rounded-br-9xl bg-white px-10 py-20 shadow-2xl md:max-w-8xl md:px-28 md:py-24 lg:rounded-t-4xl lg:rounded-bl-4xl lg:rounded-br-18xl lg:pr-20 ">
+			<form
+				className="flex w-full max-w-3xl gap-7 overflow-x-hidden lg:max-w-4xl lg:gap-16"
+				action=""
+			>
 				<Input
 					inputState={inputState}
 					stateSetter={setInputState}
@@ -57,17 +57,17 @@ const AgeMain = () => {
 				/>
 			</form>
 
-			<div className="relative mb-12 mt-12 flex flex-col items-center justify-center md:items-end">
+			<div className="relative mb-12 mt-12 flex flex-col items-center justify-center md:mb-8 md:items-end lg:m-0">
 				<button className="flex justify-center" onClick={handleSubmit}>
 					<img
-						className="mt relative z-10 h-28 w-28 cursor-pointer rounded-full bg-purple p-8 hover:bg-off-black"
+						className="mt relative z-10 h-28 w-28 cursor-pointer rounded-full bg-purple p-10 hover:bg-off-black md:h-36 md:w-36 md:p-10 lg:h-40 lg:w-40 lg:p-10"
 						src={Arrow}
 						alt=""
 					/>
 				</button>
 				<div className="absolute top-1/2 h-1 w-full border-t-2 text-light-grey"></div>
 			</div>
-			<div className="flex w-full">
+			<div className="flex w-full justify-between">
 				<AgeCalc
 					inputState={inputState}
 					years={age.years}

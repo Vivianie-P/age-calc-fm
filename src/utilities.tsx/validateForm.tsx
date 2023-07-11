@@ -23,7 +23,6 @@ export const validateForm = (
 	let date = new Date(birthDate);
 	let day = date.getDate();
 	let badDate = false;
-	// console.log(day);
 
 	stateSetter({
 		day: {

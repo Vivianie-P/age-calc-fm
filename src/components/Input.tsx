@@ -21,11 +21,11 @@ const Input = (props: TextInputProps) => {
 	};
 
 	return (
-		<div className="flex flex-col overflow-x-hidden">
+		<div className="flex flex-col overflow-x-hidden lg:w-full">
 			<label
 				className={`${
 					hasError || badDateError ? "text-light-red" : "text-smokey-grey"
-				} font-poppins text-xl tracking-widest-2 md:text-2xl`}
+				} mb-4 font-poppins text-xl tracking-widest-2 md:text-2xl`}
 				htmlFor="birthday"
 			>
 				{props.label}
@@ -37,7 +37,7 @@ const Input = (props: TextInputProps) => {
 					hasError || badDateError
 						? "border-light-red hover:border-light-red"
 						: "border-light-grey"
-				}  ${`md:h-30 h-24 cursor-pointer rounded-lg border p-4 text-3xl text-off-black placeholder:text-smokey-grey focus-visible:outline-purple`}`}
+				}  ${`md:h-30 h-24 cursor-pointer items-center rounded-lg border p-4 text-3xl text-off-black placeholder:text-smokey-grey focus-visible:outline-purple lg:h-32 lg:rounded-2xl lg:p-0 lg:px-8 lg:text-5xl`}`}
 				type="number"
 				onChange={handleChange}
 			/>
