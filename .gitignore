@@ -9,7 +9,6 @@ lerna-debug.log*
 
 age-calculator-app-main
 node_modules
-dist
 dist-ssr
 *.local
 
